@@ -2,8 +2,10 @@
 {%block title%}Create an Account{%endblock%}
 
 {%block content%}
+{% load crispy_forms_tags %}
     <form method="POST" class="form-group">
-        {{form}}
+        {% csrf_token %}
+        {{form|crispy}} <!--| sing will make changes on the following lines using crispy-->
         <button type="submit" class="btn btn-success">Register</button>
     </form>
 {%endblock%}

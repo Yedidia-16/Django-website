@@ -27,6 +27,10 @@
             margin-left:160px;
             padding: 0px 10px;
         }
+        .Buttom_writing{
+        position: absolute;
+        bottom: 10px;
+        }
 
     </style>
     <meta charset="utf-8">
@@ -36,19 +40,31 @@
 
     <title>{% block title %} Yedidia's website {% endblock %}</title>
     </head>
-    <body>
+    <body style="background-color:'red'">
         <div class="sidenav">
-            <a href="/home">Home</a>
+            <a href="/">Home</a>
             <a href="/create">Create</a>
-            <a href="/2">View</a>
+            <a href="/view">View</a>
+            <a href="/register">Register</a>
+            <div class="Buttom_writing">
+                {% if user.is_authenticated %}
+                <a href="/view">{{user}}</a>
+                <a href="/logout">Logout</a>
+                {% else %}
+                <a href="/login">Login</a>
+                <a href="/register">Singup</a>
+                {% endif %}
+            </div>
         </div>
+
         <div id="content" name="content" class="main">
             <div class="row justify-content-center">
                 <div class="col-8">
                     <h1 class="mt-2">My Site</h1>
                     <hr class="mt-0 mb-4">
-                    {% block content%}
-                    {%endblock%}
+                        {%csrf_token%}
+                        {% block content%}
+                        {%endblock%}
                 </div>
             </div>
         </div>
